@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package*.json tsconfig.json vite.config.ts ./
 
 # Installation des dépendances complètes pour la compilation
-RUN npm ci || npm install
+RUN npm install --legacy-peer-deps
 
 # Copie du code source complet
 COPY index.html ./
@@ -32,7 +32,7 @@ ENV DATA_DIR=/tmp
 
 # Copie des dépendances de production
 COPY package*.json ./
-RUN npm ci --only=production || npm install --omit=dev
+RUN npm install --omit=dev --legacy-peer-deps
 
 # Installation de tsx pour l'exécution rapide de TypeScript en production
 RUN npm install -g tsx
